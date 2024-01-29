@@ -1,0 +1,35 @@
+#!/bin/bash
+set -ex
+
+pidfile=/var/run/asterisk/asterisk.pid
+command=/usr/sbin/fwconsole
+
+# Proxy signals
+function kill_app(){
+    #kill $(cat $pidfile)
+    $command stop -q
+    exit $?
+}
+trap "kill_app" SIGINT SIGTERM
+
+echo 'Run MariaDB'
+service mariadb start
+
+sleep 5
+
+echo 'Run Apache2'
+service apache2 start
+
+sleep 5
+
+echo 'Run FreePBX'
+# start freepbx
+$command start -q    
+
+sleep 2
+
+# Loop while the pidfile and the process exist
+while [ -f $pidfile ] && kill -0 $(cat $pidfile) ; do
+    sleep 5
+done
+exit 1000 # exit unexpected
