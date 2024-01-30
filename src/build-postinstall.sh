@@ -2,7 +2,7 @@
 PROGNAME=$(basename $0)
 
 echo "Create backup dir"
-mkdir -p /backup/db
+mkdir -p /backup/var/lib/mysql
 mkdir -p /backup/var/www
 mkdir -p /backup/etc/asterisk
 mkdir -p /backup/var/log/supervisor
@@ -12,7 +12,7 @@ mkdir -p /backup/var/lib/asterisk/sounds
 mkdir -p /backup/var/lib/asterisk/moh
 
 echo "Create backup files"
-cp -r /var/lib/mysql /backup/db
+cp -r /var/lib/mysql /backup/var/lib
 cp -r /var/www /backup/var
 cp -r /etc/asterisk /backup/etc
 cp -r /var/log/supervisor /backup/var/log
@@ -22,7 +22,7 @@ cp -r /var/lib/asterisk/sounds /backup/var/lib/asterisk
 cp -r /var/lib/asterisk/moh /backup/var/lib/asterisk
 
 echo "Create data dir"
-mkdir -p /data/db/mysql
+mkdir -p /data/var/lib/mysql
 mkdir -p /data/var/www
 mkdir -p /data/etc/asterisk
 mkdir -p /data/var/log/supervisor
@@ -32,7 +32,7 @@ mkdir -p /data/var/lib/asterisk/sounds
 mkdir -p /data/var/lib/asterisk/moh
 
 echo "Create data file"
-cp -r /backup/db /data
+cp -r /backup/var/lib/mysql /data/var/lib
 cp -r /backup/var/www /data/var
 cp -r /backup/etc/asterisk /data/etc
 cp -r /backup/var/log/supervisor /data/var/log
@@ -45,7 +45,7 @@ chmod 777 -R /data
 
 echo "Create dynamic links"
 rm -rf /var/lib/mysql
-ln -s /data/db/mysql /var/lib/mysql
+ln -s /data/var/lib/mysql /var/lib/mysql
 
 rm -rf /var/www
 ln -s /data/var/www /var/www

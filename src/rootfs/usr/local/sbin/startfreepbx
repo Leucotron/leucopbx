@@ -3,6 +3,8 @@ set -ex
 
 create-volume
 
+sleep 5
+
 pidfile=/var/run/asterisk/asterisk.pid
 command=/usr/sbin/fwconsole
 

@@ -8,7 +8,7 @@ if [ -f "$FILE" ]; then
 else
     echo "$FILE não existe - Instalação inicial."
 
-    mkdir -p /data/db
+    mkdir -p /data/var/lib/mysql
     mkdir -p /data/var/www
     mkdir -p /data/etc/asterisk
     mkdir -p /data/var/log/supervisor
@@ -19,12 +19,21 @@ else
 
     chmod 777 -R /data     
 
-    cp -r /backup/db /data
+    cp -r /backup/var/lib/mysql /data/var/lib
     cp -r /backup/var/www /data/var
     cp -r /backup/etc/asterisk /data/etc
     cp -r /backup/var/log/supervisor /data/var/log
     cp -r /backup/var/log/asterisk /data/var/log
     cp -r /backup/var/spool/asterisk /data/var/spool
     cp -r /backup/var/lib/asterisk/sounds /data/var/lib/asterisk
-    cp -r /backup/var/lib/asterisk/moh /data/var/lib/asterisk    
+    cp -r /backup/var/lib/asterisk/moh /data/var/lib/asterisk   
+
+    chmod -R 777 /data/var/lib/mysql  
+    chmod -R 777 /data/var/www 
+    chmod -R 777 /data/etc/asterisk 
+    chmod -R 777 /data/var/log/supervisor 
+    chmod -R 777 /data/var/log/asterisk 
+    chmod -R 777 /data/var/spool/asterisk 
+    chmod -R 777 /data/var/lib/asterisk/sounds 
+    chmod -R 777 /data/var/lib/asterisk/moh 
 fi

@@ -5,13 +5,23 @@ networks:
 services:
   freepbx:
     image: 'leucotron/freepbx:17.0'
+    container_name: freepbx
     restart: unless-stopped
     environment:
-      - TZ=America/Sao_Paulo
+      - TZ=America/Sao_Paulo  
+    volumes:
+      - './data/var/lib/mysql:/data/var/lib/mysql'  
+      - './data/var/www:/data/var/www'
+      - './data/etc/asterisk:/data/etc/asterisk'
+      - './data/var/log/supervisor:/data/var/log/supervisor'
+      - './data/var/log/asterisk:/data/var/log/asterisk'
+      - './data/var/spool/asterisk:/data/var/spool/asterisk'
+      - './data/var/lib/asterisk/sounds:/data/var/lib/asterisk/sounds'
+      - './data/var/lib/asterisk/moh:/data/var/lib/asterisk/moh'
     ports:
       - '80:80'
       - '3306:3306'
       - '5060:5060/udp'
-      - '10000-12000:10000-12000/udp'
+      - '10000-10200:10000-10200/udp'
     networks:
       freepbxnet: null
