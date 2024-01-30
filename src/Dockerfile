@@ -37,6 +37,7 @@ EXPOSE \
   ${APP_PORT_RTP_START}-${APP_PORT_RTP_END}/tcp \
   ${APP_PORT_RTP_START}-${APP_PORT_RTP_END}/udp
 
-VOLUME /var/lib/asterisk/sounds /var/spool/asterisk /var/log/asterisk /var/log/supervisor /etc/asterisk /var/www /var/lib/mysql
+#VOLUME /var/lib/asterisk/sounds /var/spool/asterisk /var/log/asterisk /var/log/supervisor /etc/asterisk /var/www /var/lib/mysql
+VOLUME /data
 
 CMD ["/usr/bin/supervisord"]
