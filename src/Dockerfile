@@ -13,6 +13,7 @@ ADD rootfs /
 COPY build-freepbx.sh /
 COPY build-asterisk.sh /
 COPY build-start.sh /
+COPY build-postinstall.sh /
 RUN /build-start.sh
 
 
@@ -36,6 +37,6 @@ EXPOSE \
   ${APP_PORT_RTP_START}-${APP_PORT_RTP_END}/tcp \
   ${APP_PORT_RTP_START}-${APP_PORT_RTP_END}/udp
 
-VOLUME /var/lib/asterisk/sounds /var/spool/asterisk /var/log/asterisk /var/log/supervisor /etc/asterisk /var/www
+VOLUME /var/lib/asterisk/sounds /var/spool/asterisk /var/log/asterisk /var/log/supervisor /etc/asterisk /var/www /var/lib/mysql
 
 CMD ["/usr/bin/supervisord"]

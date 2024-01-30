@@ -27,7 +27,8 @@ mkdir -p /var/log/supervisor
 
 ./build-freepbx.sh
 
+./build-postinstall.sh
+
 apt-get clean
 
 exec rm -f /build-start.sh
-

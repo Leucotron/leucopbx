@@ -56,4 +56,9 @@ service mariadb start
 ./install -n
 fwconsole ma installall
 fwconsole reload
+
 fwconsole restart
+sleep 5
+
+fwconsole stop
+service mariadb stop

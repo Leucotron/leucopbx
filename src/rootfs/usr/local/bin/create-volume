@@ -1,0 +1,30 @@
+#!/bin/bash
+set -ex
+
+FILE=/etc/asterisk/extensions.conf
+
+if [ -f "$FILE" ]; then
+    echo "$FILE existe - Segue execução normal."
+else
+    echo "$FILE não existe - Instalação inicial."
+
+    mkdir -p /data/db
+    mkdir -p /data/var/www
+    mkdir -p /data/etc/asterisk
+    mkdir -p /data/var/log/supervisor
+    mkdir -p /data/var/log/asterisk
+    mkdir -p /data/var/spool/asterisk
+    mkdir -p /data/var/lib/asterisk/sounds
+    mkdir -p /data/var/lib/asterisk/moh
+
+    chmod 777 -R /data     
+
+    cp -r /backup/db /data
+    cp -r /backup/var/www /data/var
+    cp -r /backup/etc/asterisk /data/etc
+    cp -r /backup/var/log/supervisor /data/var/log
+    cp -r /backup/var/log/asterisk /data/var/log
+    cp -r /backup/var/spool/asterisk /data/var/spool
+    cp -r /backup/var/lib/asterisk/sounds /data/var/lib/asterisk
+    cp -r /backup/var/lib/asterisk/moh /data/var/lib/asterisk    
+fi
