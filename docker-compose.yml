@@ -1,0 +1,17 @@
+version: '3.7'
+networks:
+  freepbxnet:
+    driver: bridge
+services:
+  freepbx:
+    image: 'leucotron/freepbx:17.0'
+    restart: unless-stopped
+    environment:
+      - TZ=America/Sao_Paulo
+    ports:
+      - '80:80'
+      - '3306:3306'
+      - '5060:5060/udp'
+      - '10000-12000:10000-12000/udp'
+    networks:
+      freepbxnet: null
